@@ -1,0 +1,2 @@
+Desarrollo de una tienda online, con dos ambientes de trabajo, Angular.Js y React.Js, con base de datos MongoDb. 
+Development of an online store, with two work environments, Angular.Js and React.Js, with MongoDb database
