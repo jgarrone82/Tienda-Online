@@ -1,0 +1,19 @@
+{
+  "name": "tienda-online",
+  "version": "1.0.0",
+  "description": "Tienda online con desarrollo en Reat.Js y Angulas.Js con base de datos MongoDb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgarrone82/Tienda-Online.git"
+  },
+  "author": "Jorge Garrone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgarrone82/Tienda-Online/issues"
+  },
+  "homepage": "https://github.com/jgarrone82/Tienda-Online#readme"
+}
