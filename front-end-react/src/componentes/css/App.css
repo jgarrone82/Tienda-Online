@@ -1,0 +1,270 @@
+body{
+    margin: 0;
+}
+.fondo, .fondo2{
+    width: auto;
+    height: 100vh;
+}
+.fondo{
+    background-image: url(../../assets/img/login-fondo.jpg); 
+}
+.fondo2
+{ 
+    background-color: rgba(0, 0, 0, 0.70);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.fondo3{
+    background-image: url(../../assets/img/main-fondo.jpg); 
+    height: 660px;
+    padding: 0px 40px;
+}
+.inputInicio{
+    width: 300px;
+    height: 25px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+}
+.encabezado{
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+.productos{
+    background-color: red;
+    height: 550px;
+    overflow: auto;
+}
+.vistaPrevia{
+    background-color: white;
+    height: 480px;
+}
+a{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    margin-top: 20px;
+}
+.texto1, label{
+    color: white;
+}
+.texto2{
+    color: yellow;
+}
+/* ------------------------------------------------------- */
+ /* Css del Navbar */
+ .navbar{
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding-left: 30px;
+    border-radius: 0px 0px 10px 10px;
+}
+.espaciado1{
+    padding-right: 20px;
+}
+.icon{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Propiedades para la caja de busqueda: */
+.catalogoProductos{
+    background-color: white;
+    height: 540px;
+    overflow: auto;
+}
+.buscador{
+    background-color: #F5F5F5;;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0px 30px;
+    border-bottom: solid gray thin;
+    position: fixed;
+    width: 1120px;
+    z-index: 20;
+}
+
+.catalogoTexto{
+    font-size: medium;
+    font-weight: normal;
+}
+.catalogoInput {
+    width: 220px;
+    line-height: 27px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: thin;
+    font-size: medium;
+    text-align: center;
+}
+.catalogoContenedor{
+    padding: 90px 0px 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+.producto-card{
+    background-color: white;
+    margin: 10px 7px;
+    width: 260px;
+    border: rgb(199, 198, 198);
+    border-style: solid;
+    border-width: thin;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px #b8b8b8;
+}
+.producto-card img{
+    width: 100%;
+    height: 200px;
+    border-radius: 7px 7px 0px 0px;
+}
+.productoTitulo {
+    font-size: x-large;
+    text-transform: capitalize;
+}
+.descripcion{
+    padding: 10px 10px 15px 10px;
+}
+.card-opciones{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px; 
+}
+.inputFlecha{
+    text-align: center;
+    line-height: 30px;
+    width: 50px;
+    margin-left: 5px;
+    border-radius: 7px;
+    border: solid gray thin;
+}
+
+/* ------------------------------------------------------------------ */
+/* CSS componentes VistaPrevia */
+.vistaContenedor{
+    background-color: white;
+    padding: 0px 40px 20px 20px;
+}
+.vistaTarjeta{
+    display: flex;
+    justify-content: center;
+}
+.imgVista{
+    margin-right: 50px;
+    width: 330px;
+    border: solid rgb(199, 198, 198);
+    border-width: thin;
+    border-radius: 10px;
+}
+.vistaTitulo{
+    padding: 20px 0px 15px 10px;
+    border-bottom: solid rgb(199, 198, 198);
+    border-width: thin;
+    text-transform: capitalize;
+}
+
+/* ------------------------------------------------------------------ */
+/* CSS solo para componente Carrito */
+
+.carritoContenedor{
+    background-color: white;
+    height: 400px;
+    padding: 0px 15px 0px 15px;
+    border-radius: 7px;
+}
+.compra{
+    display: flex;
+}
+.carritoProductos{
+    margin: 0px 50px 0px 20px;
+    padding: 0px 10px 0px 10px;
+    width: 400px;
+    height: 280px;
+    border: solid rgb(199, 198, 198) 1px;
+    border-radius: 5px;
+    overflow: auto;
+}
+.carritoDetalle{
+    display: flex;
+    border-bottom: solid rgb(199, 198, 198) thin;
+}
+.foto{
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+}
+.carritoImg{
+    width: 50px;
+    height: 50px;
+}
+.carritoTitulo{
+    padding: 20px;
+    border-bottom: solid rgb(199, 198, 198) thin;
+}
+.carritoItem{
+    text-transform: capitalize;
+    font-size: small;
+    margin: 5px;
+}
+
+a{
+    all: unset;
+}
+.cursor{
+    cursor: pointer;
+}
+
+/* ------------------------------------------------------------------ */
+/* CSS solo para los botones */
+.boton-inicio{
+    z-index: 10;
+    height: 35px;
+    width: 100%;
+    border-radius: 5px;
+    color: #FFF;
+    background-color: #F44336;
+    text-decoration: none;
+    cursor: pointer;
+}
+.boton-primario{
+    z-index: 10;
+    height: 35px;
+    width: 75px;
+    border-radius: 5px;
+    color: #FFF;
+    background-color: #3F51B5;
+    text-decoration: none;
+    cursor: pointer;
+}
+.boton-secundario{
+    z-index: 10;
+    height: 35px;
+    width: 75px;
+    border-radius: 5px;
+    background-color: #fafafa;
+    text-decoration: none;
+    cursor: pointer;
+}
+.boton-inicio:active, .boton-primario:active, .boton-secundario:active
+{
+	transform: translate(0px,4px);
+    -webkit-transform: translate(0px,4px);
+    border-bottom: 1px solid;
+}
