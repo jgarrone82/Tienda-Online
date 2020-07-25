@@ -1,0 +1,32 @@
+.producto-card{
+    background-color: white;
+    margin: 10px 5px;
+    width: 260px;
+    border: rgb(199, 198, 198);
+    border-style: solid;
+    border-width: thin;
+    border-radius: 7px;
+}
+.producto-card img{
+    width: 100%;
+    height: 200px;
+    border-radius: 7px 7px 0px 0px;
+}
+.descripcion{
+    padding: 10px 10px 15px 10px;
+}
+.card-opciones{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px; 
+}
+input{
+    text-align: center;
+    line-height: 30px;
+    width: 50px;
+    margin-left: 5px;
+}
+p{
+    margin: 0;
+    padding: 0;
+}

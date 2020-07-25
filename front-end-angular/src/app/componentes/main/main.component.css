@@ -1,0 +1,18 @@
+.fondo{
+    background-image: url(../../../assets/img/main-fondo.jpg); 
+    height: 100%;
+    padding: 0px 80px;
+}
+.encabezado{
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+.productos{
+    background-color: white;
+    height: 560px;
+    overflow: auto;
+}
+.vistaPrevia{
+    background-color: white;
+    height: 480px;
+}

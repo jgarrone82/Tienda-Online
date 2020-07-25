@@ -1,0 +1,28 @@
+<div class="fondo">
+    <div class="fondo2">
+        <form class="formulario" (submit)="signin()">
+            <h1>Registrate!</h1>
+            <div>
+                <label>Nombre:</label>
+                <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="name" id="nombre" placeholder=" Digita nombre completo" autofocus required>
+            </div>
+            <div>
+                <label>Correo electrónico:</label>
+                <input type="text" [(ngModel)]="nuevoUsuario.correo" name="correo" id="correo" placeholder=" ejemplo@hotmail.com" required>
+            </div>
+            <div>
+                <label>Contraseña:</label>
+                <input type="password" [(ngModel)]="nuevoUsuario.contrasena1" name="contrasena1" id="contrasena1" placeholder=" Digita contrasena" required>
+            </div>
+            <div>
+                <label>Confirma Contraseña:</label>
+                <input type="password" [(ngModel)]="nuevoUsuario.contrasena2" name="contrasena2" id="contrasena2" placeholder=" Confirma tu contrasena" required>
+            </div>
+                
+            <button mat-raised-button color="warn" type="submit">Confirmar Registro</button>
+        
+            <a [routerLink]="['/']">Iniciar sesión</a>
+        </form>
+
+    </div>
+</div>

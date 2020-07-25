@@ -1,0 +1,20 @@
+<div class="fondo">
+    <div class="fondo2">
+        <form class="formulario" (submit)="login()">
+            <h1>Iniciar sesión</h1>
+    
+            <p>Correo electrónico:</p>
+            <input type="text" [(ngModel)]="usuario.email" name="correo" id="correo" autofocus required>
+
+            <p>Digite contraseña:</p>
+            <div class="contrasena-box">
+                <input type="{{inputType}}" [(ngModel)]="usuario.pass" name="contrasena" id="contrasena" ng-model="campoContrasena" required>
+                <img src="{{ojo}}">
+            </div>
+            
+            <button mat-raised-button color="warn" type="submit">Ingresar</button>
+            <a routerLink="/signin">Eres nuevo? Registrate primero!</a>
+        </form>
+    
+    </div>
+</div>

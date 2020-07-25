@@ -1,0 +1,11 @@
+.navbar{
+    justify-content: space-between;
+    height: 60px;
+    padding-left: 50px;
+}
+span{
+    padding-right: 20px;
+}
+mat-icon{
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+<div class="contenedor">
+    <h1>{{productoVista.nombreProducto | titlecase}}</h1>
+    <div class="tarjeta">
+        <div class="fotografia">
+            <img src="../../../assets/img/{{productoVista.imagenUrl}}">
+        </div>
+        <div class="descripcion">
+            <h2>Precio: $ <span>{{productoVista.precioUnitario | number}}</span></h2>
+            <h3>Unidades Disponibles: <span>{{productoVista.cantidadDisponible}}</span></h3>
+        </div>
+    </div>
+    <button mat-raised-button color="basic" (click)="productos()">Atrás</button>
+</div>

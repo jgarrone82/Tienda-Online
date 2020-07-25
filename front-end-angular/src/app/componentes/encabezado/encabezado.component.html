@@ -1,0 +1,12 @@
+<mat-toolbar class="navbar">
+    <div>
+        <span>La Bodega</span>
+    </div>
+    <div>  
+        <span><mat-icon>list</mat-icon></span>
+        <span><mat-icon matBadge="{{this.ProductosService.carritoEncabezado}}" matBadgeColor="warn" routerLink="/main/carrito">shopping_cart</mat-icon></span>
+        <span><mat-icon>share</mat-icon></span>
+        <span><mat-icon>favorite_border</mat-icon></span>
+        <span><mat-icon (click)="salir()">exit_to_app</mat-icon></span>
+    </div>
+</mat-toolbar>

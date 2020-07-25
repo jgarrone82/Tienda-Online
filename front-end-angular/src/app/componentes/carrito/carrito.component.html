@@ -1,0 +1,25 @@
+<div class="contenedor">
+    <h1>Carrito de compras</h1>
+    <div class="compra">
+        <div class="productos">
+            <div class="detalle" *ngFor="let producto of carritoProductos">
+                <div class="foto">
+                    <img src="/assets/img/{{producto.imagenUrl}}">
+                </div>
+                <div>
+                    <p><strong>{{producto.nombreProducto | titlecase}}</strong></p>
+                    <p><strong>Unidades: </strong><span>{{producto.cantidadCarrito}}</span></p>
+                    <p><strong>Subtotal: $ </strong><span>{{producto.subtotal | number}}</span></p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="factura">
+            <h2>Total: $ <span>{{total | number}}</span></h2>
+            <button mat-raised-button color="basic" routerLink="/main">Volver</button>
+            <button mat-raised-button color="primary"(click)="pagar()">Pagar</button>
+        </div>
+    </div>
+</div>

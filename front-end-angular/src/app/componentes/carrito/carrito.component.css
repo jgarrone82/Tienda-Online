@@ -1,0 +1,38 @@
+.contenedor{
+    background-color: white;
+    height: 400px;
+    padding: 0px 15px 0px 15px;
+}
+.compra{
+    display: flex;
+}
+.productos{
+    margin: 0px 50px 0px 20px;
+    padding: 0px 10px 0px 10px;
+    width: 400px;
+    height: 280px;
+    border: solid rgb(199, 198, 198) 1px;
+    border-radius: 5px;
+    overflow: auto;
+}
+.detalle{
+    display: flex;
+    border-bottom: solid rgb(199, 198, 198) thin;
+}
+.foto{
+    display: flex;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+}
+img{
+    width: 60px;
+    height: 60px;
+}
+p{
+    font-size: small;
+    margin: 5px;
+}
+h1{
+    padding: 20px;
+    border-bottom: solid rgb(199, 198, 198) thin;
+}

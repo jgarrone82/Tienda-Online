@@ -1,0 +1,29 @@
+<div class="productos">
+    <mat-toolbar class="buscador">
+        <div>
+            <span>Catálogo de productos</span>
+        </div>
+        <div>
+            <p>¿Qué estás buscando?</p>  
+            <input type="text" name="buscar" placeholder="Escribe..." [(ngModel)] = "filtrado">     
+        </div>
+    </mat-toolbar>
+    <div class="contenedor">
+         <div class="producto-card" *ngFor="let producto of datoProductos | filtro: filtrado"> 
+            <img src="/assets/img/{{producto.imagenUrl}}">
+            <div class="descripcion">
+                <h1>{{producto.nombreProducto | titlecase}}</h1>
+                <p><strong>Precio: </strong>$  {{producto.precioUnitario | number}}</p>
+                <p><strong>Unidades disponibles: </strong>{{producto.cantidadDisponible}}</p>
+                <div class="card-opciones">
+                    <button mat-raised-button color="basic" (click)="productoSeleccionado(producto)">Ver más</button>
+                    <div>
+                        <button mat-raised-button color="primary" (click)="agregaCarrito(producto, cantidadCarrito.value)">Añadir</button>
+                        <input type="number" min="1" max="10" step="1" value="1" #cantidadCarrito>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,87 @@
+/* Propiedades para la caja de busqueda: */
+.productos{
+    background-color: white;
+    height: 560px;
+    overflow: auto;
+}
+.buscador{
+    justify-content: space-between;
+    height: 80px;
+    padding: 0px 50px;
+    border-bottom: solid gray thin;
+    position: fixed;
+    width: 1100px;
+    z-index: 20;
+}
+span{
+    font-size: x-large;
+}
+p{
+    font-size: medium;
+    font-weight: normal;
+    margin: 0;
+}
+input  {
+    width: 220px;
+    line-height: 27px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: thin;
+    font-size: medium;
+    text-align: center;
+}
+.contenedor{
+    padding: 90px 0px 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Esto es para mostrar las flechas permanentes solo para los inputs tipo numero */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+
+/* ------------------------------------------------------------ */
+/* Propiedades para la caja de presentaciòn del producto: */
+
+.producto-card{
+    background-color: white;
+    margin: 10px 7px;
+    width: 260px;
+    border: rgb(199, 198, 198);
+    border-style: solid;
+    border-width: thin;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px #b8b8b8;
+}
+.producto-card img{
+    width: 100%;
+    height: 200px;
+    border-radius: 7px 7px 0px 0px;
+}
+.descripcion{
+    padding: 10px 10px 15px 10px;
+}
+.card-opciones{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px; 
+}
+.contenedor input{
+    text-align: center;
+    line-height: 30px;
+    width: 50px;
+    margin-left: 5px;
+}
+button{
+    z-index: 10;
+    height: 34px;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
