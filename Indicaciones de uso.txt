@@ -1,0 +1,12 @@
+1 - Abrir carpeta Backend en editor de código         - (Visual Studio Code)
+2 - Abrir una consola y escribir: mongod              - (Debe tener instalado Mongodb en PC)
+3 - Abrir otra consola y escribir: mongo              - Para iniciar el servidor
+4 - Abrir otra consola y escribir: npm run ejecutar   - Para iniciar el Backend
+5 - Abrir carpeta front-end-angular en editor de código   - (Visual Studio Code)
+6 - Abrir una consola y escribir: ng serve               - Para iniciar Angular
+7 - Abrir carpeta front-end-react en editor de código    - (Visual Studio Code)
+8 - Abrir una consola y escribir: npm start		  - Para iniciar React.Js
+9 - Abrir navegador y escribir dirección: http://localhost:4200/     - Muestra la tienda en Angular
+10 - Abrir navegador y escribir dirección: http://localhost:3000/     - Muestra la tienda en React.Js
+11 - Se debe crear un nuevo usuario: Dar click en Registrate! En cualquier proyecto (Angular o React.Js)
+12 - Utilizar el correo y contraseña creado en el paso anterior para ingresar a la tienda
