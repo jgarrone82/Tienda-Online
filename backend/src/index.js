@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'),
       database = require('./database.js'),
       cors = require('cors'),
@@ -5,7 +6,7 @@ const express = require('express'),
       rutaProductos = require('./rutas/rutaProductos.js')
 
 //Inicializaciones:
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(cors());

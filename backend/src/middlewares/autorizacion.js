@@ -11,7 +11,7 @@ function verificaAutorizacion(peticion,respuesta,next){
         return respuesta.status(403).send({resultado: "Acceso Denegado 2"})
     }
 
-    const payload = jwt.decode(token,"secretKey123") 
+    const payload = jwt.decode(token, process.env.JWT_SECRET)
         
     peticion.usuarioId = payload._id    
     next()

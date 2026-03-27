@@ -6,7 +6,7 @@ function compruebaToken(peticion,respuesta,next)
     if (bearerHeader){                                                                      
         const bearer = bearerHeader.split(" ")
         const bearerToken = bearer[1]
-        jwt.verify(bearerToken, 'secretKey123',(error,data) => {
+        jwt.verify(bearerToken, process.env.JWT_SECRET,(error,data) => {
             if(error){
                 return respuesta.json({resultado: "El token es falso! "})
             } else {

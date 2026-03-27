@@ -26,7 +26,7 @@ router.post('/nuevoUsuario', async function(peticion,respuesta)
           nuevoUsuario.contrasena = await nuevoUsuario.encriptarContrasena(contrasena1) 
           
           await nuevoUsuario.save()
-          const token = jwt.sign({_id: nuevoUsuario._id}, 'secretKey123')
+          const token = jwt.sign({_id: nuevoUsuario._id}, process.env.JWT_SECRET)
           
           respuesta.status(200).send({resultado: "SI", msg: "Usuario creado correctamente. Ya puede iniciar sesión", token})
         }
@@ -57,7 +57,7 @@ router.post('/login', async function(peticion, respuesta)
       
       if (validaPass) 
       {
-        const token = jwt.sign({_id:login._id},'secretKey123')  
+        const token = jwt.sign({_id:login._id},process.env.JWT_SECRET)  
         respuesta.status(200).send({resultado: "Autorizado", msg: "Bienvenido(a) " + login.usuario, token})
       } else {
         respuesta.send({resultado: "Acceso Denegado", msg: "Contraseña ingresada incorrecta."})
