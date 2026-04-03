@@ -11,10 +11,13 @@ function verificaAutorizacion(peticion,respuesta,next){
         return respuesta.status(403).send({resultado: "Acceso Denegado 2"})
     }
 
-    const payload = jwt.decode(token, process.env.JWT_SECRET)
-        
-    peticion.usuarioId = payload._id    
-    next()
+    try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
+        peticion.usuarioId = payload._id    
+        next()
+    } catch (error) {
+        return respuesta.status(401).send({resultado: "Acceso Denegado", msg: "Token inválido o expirado"})
+    }
 }
 
 module.exports = {verificaAutorizacion}       

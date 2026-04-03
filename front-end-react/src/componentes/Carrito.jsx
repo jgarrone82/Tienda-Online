@@ -11,7 +11,7 @@ const Carrito = (props) => (
             </div>
 
             <div className="factura">
-                <h2>Total: $ <span>{props.total.toLocaleString('en-IN')}</span></h2>
+                <h2>Total: <span>{props.total.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span></h2>
                 <button onClick={() => props.history.push('/main')} className="boton-secundario">Volver</button>
                 <button onClick={() => props.pagar()} className="boton-primario">Pagar</button>
             </div>

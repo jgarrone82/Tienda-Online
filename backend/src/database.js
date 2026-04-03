@@ -2,14 +2,7 @@ const mongoose = require('mongoose');
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost/tienda_db';
 
-mongoose.connect(uri,        
-{
-    useCreateIndex: true,                                                            
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true
-    
-})
+mongoose.connect(uri)
 .then(function()
 {
     console.log("Se conecto correctamente a la Database")

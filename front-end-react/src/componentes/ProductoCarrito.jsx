@@ -6,12 +6,12 @@ const ProductoCarrito = (props) => (
         return (
                 <div className="carritoDetalle" key={indice}>
                     <div className="foto">
-                        <img src={require("../assets/img/"+ producto.imagenUrl)} className="carritoImg" alt="carritoProducto"/>
+                        <img src={new URL('../assets/img/' + producto.imagenUrl, import.meta.url).href} className="carritoImg" alt="carritoProducto"/>
                     </div>
                     <div>
                         <p className="carritoItem"><strong>{producto.nombreProducto}</strong></p>
                         <p className="carritoItem"><strong>Unidades: </strong><span>{producto.cantidadCarrito}</span></p>
-                        <p className="carritoItem"><strong>Subtotal: $ </strong><span>{producto.subtotal.toLocaleString('en-IN')}</span></p>
+                        <p className="carritoItem"><strong>Subtotal: </strong><span>{producto.subtotal.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span></p>
                     </div>
                 </div>
         )

@@ -13,8 +13,8 @@ router.post('/nuevoUsuario', async function(peticion,respuesta)
         respuesta.send({resultado: "NO", msg:"Ningun campo del formulario puede estar vacío", nombre, correo})
     }else if (contrasena1 != contrasena2){
         respuesta.send({resultado: "NO", msg:"Contraseñas ingresadas no son iguales", nombre, correo})
-    }else if (contrasena1.length < 3){
-        respuesta.send({resultado: "NO", msg:"Contraseñas debe tener al menos 3 caracteres", nombre, correo})
+    }else if (contrasena1.length < 8){
+        respuesta.send({resultado: "NO", msg:"Contraseña debe tener al menos 8 caracteres", nombre, correo})
     }else {
         const nuevoUsuario = new UsuarioHP({usuario: nombre, correo, contrasena: contrasena1})   
         const validaCorreo = await UsuarioHP.findOne({correo: correo}); 
@@ -36,8 +36,6 @@ router.post('/nuevoUsuario', async function(peticion,respuesta)
 router.post('/login', async function(peticion, respuesta)
 {
   const {email, pass} = peticion.body
-  console.log(peticion)
-  console.log({email,pass})
   
   if (email == null || pass == null){
     respuesta.send({resultado: "Acceso Denegado", msg:"Por favor diligenciar los dos campos para ingresar"})

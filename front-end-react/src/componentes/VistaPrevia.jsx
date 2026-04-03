@@ -9,10 +9,10 @@ const VistaPrevia = (props) => {
             <h1 className="vistaTitulo">{nombreProducto}</h1>
             <div className="vistaTarjeta">
                 <div className="fotografia">
-                    <img src={require("../assets/img/" + imagenUrl)} className="imgVista" alt="VistaProducto"/>
+                    <img src={new URL('../assets/img/' + imagenUrl, import.meta.url).href} className="imgVista" alt="VistaProducto"/>
                 </div>
                 <div className="descripcion">
-                    <h2>Precio: $ <span>{precioUnitario.toLocaleString('en-IN')}</span></h2>
+                    <h2>Precio: <span>{precioUnitario.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</span></h2>
                     <h3>Unidades Disponibles: <span>{cantidadDisponible}</span></h3>
                 </div>
             </div>
