@@ -34,3 +34,9 @@ coverage/
 
 # Misc
 *.log
+
+# AI agent internal files
+.atl/
+
+# SDD artifacts (build scaffolding, not for portfolio)
+openspec/
