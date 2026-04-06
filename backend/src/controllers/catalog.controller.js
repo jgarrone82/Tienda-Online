@@ -10,7 +10,7 @@ const router = express.Router();
 function validateWithZod(schema, body) {
   const result = schema.safeParse(body);
   if (!result.success) {
-    const errors = result.error.errors.map(err => ({
+    const errors = result.error.errors.map((err) => ({
       path: err.path.join('.'),
       message: err.message,
     }));
@@ -25,47 +25,38 @@ router.get('/cargueProductos', async function (peticion, respuesta) {
     const productos = await ProductService.obtenerTodosProductos();
     respuesta.send(productos);
   } catch (error) {
-    respuesta.status(500).send({ 
-      resultado: 'ERROR', 
-      msg: 'Error interno del servidor' 
+    respuesta.status(500).send({
+      resultado: 'ERROR',
+      msg: 'Error interno del servidor',
     });
   }
 });
-    
-    // Pasamos todos los campos incluyendo cantidadComprada si existía
-    const resultado = await ProductService.actualizarInventario({
-      nombreProducto: validatedData.nombreProducto,
-      imagenUrl: validatedData.imagenUrl,
-      cantidadDisponible: validatedData.cantidadDisponible,
-      precioUnitario: validatedData.precioUnitario,
-      cantidadComprada: peticion.body.cantidadComprada // Mantener para compatibilidad
-    });
-    
+
+// GET /inventarioInicial - Carga inicial de productos desde baseProductos.json
+router.get('/inventarioInicial', async function (peticion, respuesta) {
+  try {
+    const resultado = await ProductService.inicializarProductos();
     respuesta.send(resultado);
   } catch (error) {
-    if (error.statusCode) {
-      respuesta.status(error.statusCode).send({ 
-        resultado: 'ERROR', 
-        msg: error.message 
-      });
-    } else {
-      respuesta.status(500).send({
-        resultado: 'ERROR',
-        msg: 'Error interno del servidor',
-      });
-    }
+    respuesta.status(500).send({
+      resultado: 'ERROR',
+      msg: 'Error interno del servidor',
+    });
   }
 });
-    }
-  }
-});
+
+// POST /actualizaInventario - Crear nuevo producto
+router.post('/actualizaInventario', async function (peticion, respuesta) {
+  try {
+    const resultado = await ProductService.actualizarInventario(peticion.body);
+    respuesta.send(resultado);
+  } catch (error) {
     if (error.statusCode) {
       respuesta.status(error.statusCode).send({
         resultado: 'ERROR',
         msg: error.message,
       });
     } else {
-      
       respuesta.status(500).send({
         resultado: 'ERROR',
         msg: 'Error interno del servidor',
@@ -81,7 +72,6 @@ router.get('/cantidadProductos', auth, async function (peticion, respuesta) {
     const cantidad = await CartService.obtenerCantidadProductos(idUsuario);
     respuesta.status(200).send('' + cantidad);
   } catch (error) {
-    
     respuesta.status(500).send('Error interno');
   }
 });
@@ -102,7 +92,6 @@ router.post('/agregaCarrito', auth, async function (peticion, respuesta) {
         msg: error.message,
       });
     } else {
-      
       respuesta.status(500).send('Hubo un error agregando producto al carrito');
     }
   }
@@ -120,7 +109,6 @@ router.get('/muestraCarrito', auth, async function (peticion, respuesta) {
       respuesta.status(204).send(null);
     }
   } catch (error) {
-    
     respuesta.status(500).send('Error interno del servidor');
   }
 });
@@ -142,7 +130,6 @@ router.get('/pagar', auth, async function (peticion, respuesta) {
         msg: error.message,
       });
     } else {
-      
       respuesta.status(500).send({
         resultado: 'ERROR',
         msg: 'Error interno del servidor',

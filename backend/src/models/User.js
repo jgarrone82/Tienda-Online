@@ -7,7 +7,7 @@ const UserSchema = new Schema(
     usuario: { type: String, required: true, lowercase: true },
     correo: { type: String, required: true, unique: true },
     contrasena: { type: String, required: true, select: true },
-    signupDate: { type: Date, default: Date.now() },
+    signupDate: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

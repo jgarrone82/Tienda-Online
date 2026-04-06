@@ -11,7 +11,8 @@ const jwt = require('jsonwebtoken');
  * - Returns 401 on invalid/expired token, 403 on missing token
  */
 function auth(peticion, respuesta, next) {
-  const bearerHeader = peticion.headers['autorizacion'];
+  // Headers HTTP son case-insensitive, pero usamos el estándar 'authorization'
+  const bearerHeader = peticion.headers['authorization'] || peticion.headers['Authorization'];
 
   if (!bearerHeader) {
     return respuesta.status(403).send({ resultado: 'Acceso Denegado' });

@@ -21,6 +21,26 @@ function validateWithZod(schema, body) {
  */
 class ProductService {
   /**
+   * Inicializa la base de datos con productos desde baseProductos.json
+   * @returns {Promise<Object>} Respuesta de éxito
+   */
+  static async inicializarProductos() {
+    const productos = await Product.find();
+
+    if (productos.length !== 0) {
+      return { resultado: 'OK', msg: 'baseProductos.json ya existia' };
+    }
+
+    const baseProductos = require('../../baseProductos.json');
+    for (let i = 0; i < baseProductos.length; i++) {
+      const insertaProductos = new Product(baseProductos[i]);
+      await insertaProductos.save();
+    }
+
+    return { resultado: 'OK', msg: 'Se cargaron los productos correctamente' };
+  }
+
+  /**
    * Obtiene todos los productos disponibles
    * @returns {Promise<Array>} Lista de productos con formato de respuesta original
    */
