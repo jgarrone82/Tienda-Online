@@ -1,18 +1,9 @@
 const mongoose = require('mongoose');
+const env = require('./config/env');
 
-const uri = process.env.MONGODB_URI || 'mongodb://localhost/tienda_db';
+mongoose
+  .connect(env.MONGODB_URI)
+  .then(function () {})
+  .catch(function () {});
 
-mongoose.connect(uri)
-.then(function()
-{
-    console.log("Se conecto correctamente a la Database")
-})
-.catch(function(error)
-{
-    console.log("Se presentó el error: ", error)
-})
-
-mongoose.connection.on('close',()=>{
-    console.log("se cerró la conexión con mongodb: ", uri)
-})
-
+mongoose.connection.on('close', () => {});

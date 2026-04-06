@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --forceExit --detectOpenHandles",
     "start": "node src/index.js",
     "ejecutar": "nodemon src/index.js",
-    "lint": "eslint src/"
+    "lint": "eslint src/ tests/"
   },
   "keywords": [],
   "author": "Jorge Garrone",
@@ -17,11 +17,17 @@
     "cors": "^2.8.5",
     "dotenv": "^17.3.1",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^8.3.2",
     "jsonfile": "^6.0.1",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^8.8.3"
+    "mongoose": "^8.8.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "jest": "^30.3.0",
+    "mongodb-memory-server": "^11.0.1",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
   }
 }
