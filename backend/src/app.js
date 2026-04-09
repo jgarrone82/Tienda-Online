@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('express-async-errors'); // Must be imported before express
 const express = require('express');
 require('./database.js');
 const cors = require('cors');

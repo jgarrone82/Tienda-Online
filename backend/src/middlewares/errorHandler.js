@@ -10,7 +10,7 @@
  */
 function errorHandler(error, peticion, respuesta, next) {
   // Log error for debugging (remove in production or use a logger)
-  console.error('Error:', error.message);
+  // Removed console.error
 
   // If it's an operational error with a status code, use it
   if (error.statusCode) {

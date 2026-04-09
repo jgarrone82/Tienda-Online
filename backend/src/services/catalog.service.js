@@ -1,13 +1,14 @@
+const mongoose = require('mongoose');
 const Product = require('../models/Product');
 const Cart = require('../models/Cart');
-const { ValidationError } = require('../errors/AppError');
+const { ValidationError, AppError } = require('../errors/AppError');
 const { productoSchema, agregaCarritoSchema } = require('../validators/catalog.schema');
 
 // Helper function to validate with Zod and throw ValidationError
 function validateWithZod(schema, body) {
   const result = schema.safeParse(body);
   if (!result.success) {
-    const errors = result.error.errors.map((err) => ({
+    const errors = result.error.issues.map((err) => ({
       path: err.path.join('.'),
       message: err.message,
     }));
@@ -155,42 +156,80 @@ class CartService {
   }
 
   /**
-   * Procesa el pago: descuenta stock y vacía el carrito
+   * Procesa el pago: descuenta stock y vacía el carrito (con transacción)
    * @param {string} idUsuario - ID del usuario
    * @returns {Promise<Object>} Respuesta de pago exitoso
    * @throws {AppError} Si hay stock insuficiente
    */
   static async procesarPago(idUsuario) {
-    // NOTE: Esta implementación SIN transacciones mantiene el comportamiento original
-    // La fase 4 agregará transacciones MongoDB
     const consulta = await Cart.findOne({ idUsuario });
     if (!consulta) {
-      throw new Error('NO HAY PRODUCTOS PARA PAGAR'); // Mantener mensaje original
+      throw new Error('NO HAY PRODUCTOS PARA PAGAR');
     }
 
     const productosAConsultar = consulta.productos;
 
-    for (let i = 0; i < productosAConsultar.length; i++) {
-      const itemCarrito = productosAConsultar[i];
-      const inventario = await Product.findOne({ _id: itemCarrito.idProducto });
+    // Iniciar sesión de MongoDB para transacción
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
-      if (!inventario) {
-        // Si el producto ya no existe, continuamos (comportamiento original)
-        continue;
+    try {
+      // Validar stock antes de procesar
+      for (let i = 0; i < productosAConsultar.length; i++) {
+        const itemCarrito = productosAConsultar[i];
+        const inventario = await Product.findOne({ _id: itemCarrito.idProducto }).session(session);
+
+        if (!inventario) {
+          continue;
+        }
+
+        // Validar stock insuficiente
+        if (inventario.cantidadDisponible < itemCarrito.cantidadCarrito) {
+          const error = new AppError(
+            `Stock insuficiente para ${inventario.nombreProducto}`,
+            400,
+            'INSUFFICIENT_STOCK',
+            {
+              producto: inventario.nombreProducto,
+              stock: inventario.cantidadDisponible,
+              solicitado: itemCarrito.cantidadCarrito,
+            },
+          );
+          await session.abortTransaction();
+          session.endSession();
+          throw error;
+        }
       }
 
-      inventario.cantidadDisponible = inventario.cantidadDisponible - itemCarrito.cantidadCarrito;
+      // Descontar stock
+      for (let i = 0; i < productosAConsultar.length; i++) {
+        const itemCarrito = productosAConsultar[i];
+        const inventario = await Product.findOne({ _id: itemCarrito.idProducto }).session(session);
 
-      // Comportamiento original: si stock negativo, poner a 0 en lugar de abortar
-      if (inventario.cantidadDisponible < 0) {
-        inventario.cantidadDisponible = 0;
+        if (!inventario) {
+          continue;
+        }
+
+        inventario.cantidadDisponible = inventario.cantidadDisponible - itemCarrito.cantidadCarrito;
+        await inventario.save({ session });
       }
 
-      await inventario.save();
+      // Eliminar carrito
+      await Cart.findOneAndDelete({ idUsuario }).session(session);
+
+      // Commit de la transacción
+      await session.commitTransaction();
+      session.endSession();
+
+      return { msg: 'OK PAGO' };
+    } catch (error) {
+      // Si hay error, abortar transacción (solo si no fue abortada ya)
+      if (session.inTransaction()) {
+        await session.abortTransaction();
+      }
+      session.endSession();
+      throw error;
     }
-
-    await Cart.findOneAndDelete({ idUsuario });
-    return { msg: 'OK PAGO' };
   }
 }
 

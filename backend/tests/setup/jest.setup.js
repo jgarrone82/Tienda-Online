@@ -3,18 +3,20 @@ const mongoose = require('mongoose');
 
 let mongod;
 
-async function setupTestDB() {
+beforeAll(async () => {
   mongod = await MongoMemoryReplSet.create({ replSet: { count: 1 } });
   const uri = mongod.getUri();
   await mongoose.connect(uri);
-}
+}, 30000);
 
-async function teardownTestDB() {
+afterAll(async () => {
   await mongoose.disconnect();
   await mongod.stop();
-}
+});
 
-module.exports = {
-  setupTestDB,
-  teardownTestDB,
-};
+afterEach(async () => {
+  const collections = mongoose.connection.collections;
+  for (const key in collections) {
+    await collections[key].deleteMany({});
+  }
+});

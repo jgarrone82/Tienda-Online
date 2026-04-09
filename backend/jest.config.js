@@ -6,6 +6,7 @@ module.exports = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  setupFilesAfterEnv: ['<rootDir>/tests/setup/db.js'],
+  setupFiles: ['<rootDir>/tests/setup/env.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup/jest.setup.js'],
   testTimeout: 60000,
 };
