@@ -3,23 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.10.2",
-    "@material-ui/icons": "^4.9.1",
+    "@mui/material": "^5.15.0",
+    "@mui/icons-material": "^5.15.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "5.2.0"
+    "react-router-dom": "^6.20.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^8.0.7"
+    "vite": "^8.0.7",
+    "@mui/codemod": "^5.15.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "mui-codemod": "npx @mui/codemod@latest preset-safe src"
   }
 }
