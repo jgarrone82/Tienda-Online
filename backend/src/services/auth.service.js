@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const env = require('../config/env');
-const { ConflictError, UnauthorizedError } = require('../errors/AppError');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import env from '../config/env.js';
+import { ConflictError, UnauthorizedError } from '../errors/AppError.js';
 
 async function register({ nombre, correo, contrasena1 }) {
   const existingUser = await User.findOne({ correo });
@@ -42,4 +42,4 @@ async function login({ email, pass }) {
   };
 }
 
-module.exports = { register, login };
+export { register, login };

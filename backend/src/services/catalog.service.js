@@ -1,8 +1,14 @@
-const mongoose = require('mongoose');
-const Product = require('../models/Product');
-const Cart = require('../models/Cart');
-const { ValidationError, AppError } = require('../errors/AppError');
-const { productoSchema, agregaCarritoSchema } = require('../validators/catalog.schema');
+import mongoose from 'mongoose';
+import Product from '../models/Product.js';
+import Cart from '../models/Cart.js';
+import { ValidationError, AppError } from '../errors/AppError.js';
+import { productoSchema, agregaCarritoSchema } from '../validators/catalog.schema.js';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Helper function to validate with Zod and throw ValidationError
 function validateWithZod(schema, body) {
@@ -32,7 +38,9 @@ class ProductService {
       return { resultado: 'OK', msg: 'baseProductos.json ya existia' };
     }
 
-    const baseProductos = require('../../baseProductos.json');
+    const baseProductos = JSON.parse(
+      readFileSync(join(__dirname, '../../baseProductos.json'), 'utf8'),
+    );
     for (let i = 0; i < baseProductos.length; i++) {
       const insertaProductos = new Product(baseProductos[i]);
       await insertaProductos.save();
@@ -233,4 +241,4 @@ class CartService {
   }
 }
 
-module.exports = { ProductService, CartService };
+export { ProductService, CartService };

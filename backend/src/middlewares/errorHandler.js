@@ -8,7 +8,7 @@
  * - Unhandled promise rejections
  * - Unexpected errors
  */
-function errorHandler(error, peticion, respuesta, next) {
+export function errorHandler(error, peticion, respuesta, next) {
   // Log error for debugging (remove in production or use a logger)
   // Removed console.error
 
@@ -43,5 +43,3 @@ function errorHandler(error, peticion, respuesta, next) {
     msg: 'Error interno del servidor',
   });
 }
-
-module.exports = { errorHandler };

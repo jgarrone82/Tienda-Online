@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema(
@@ -13,5 +13,4 @@ const ProductSchema = new Schema(
   },
 );
 
-// Keep collection name 'productoHP' for backward compatibility
-module.exports = mongoose.model('productoHP', ProductSchema);
+export default mongoose.model('productoHP', ProductSchema);

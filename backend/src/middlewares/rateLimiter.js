@@ -1,5 +1,5 @@
-const rateLimit = require('express-rate-limit');
-const env = require('../config/env');
+import rateLimit from 'express-rate-limit';
+import env from '../config/env.js';
 
 /**
  * Rate limiter for login endpoint.
@@ -33,4 +33,4 @@ const registerLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-module.exports = { loginLimiter, registerLimiter };
+export { loginLimiter, registerLimiter };

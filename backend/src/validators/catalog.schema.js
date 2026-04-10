@@ -1,4 +1,4 @@
-const z = require('zod');
+import { z } from 'zod';
 
 const productoSchema = z.object({
   nombreProducto: z.string().min(1, 'Nombre del producto es requerido'),
@@ -18,4 +18,4 @@ const agregaCarritoSchema = z.object({
   cantidadCarrito: z.number().int().positive('Cantidad debe ser un entero positivo'),
 });
 
-module.exports = { productoSchema, agregaCarritoSchema };
+export { productoSchema, agregaCarritoSchema };

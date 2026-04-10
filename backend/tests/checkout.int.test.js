@@ -1,12 +1,11 @@
-const request = require('supertest');
-// Removed unused mongoose import
-const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const app = require('../src/app');
-const User = require('../src/models/User');
-const Product = require('../src/models/Product');
-const Cart = require('../src/models/Cart');
-const env = require('../src/config/env');
+import request from 'supertest';
+import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import app from '../src/app.js';
+import User from '../src/models/User.js';
+import Product from '../src/models/Product.js';
+import Cart from '../src/models/Cart.js';
+import env from '../src/config/env.js';
 
 describe('Checkout Integration Tests', () => {
   let token;

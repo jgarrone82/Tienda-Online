@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 
 const env = {
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost/tienda_db',
@@ -7,4 +7,4 @@ const env = {
   RATE_LIMIT_REGISTER: process.env.RATE_LIMIT_REGISTER || 3,
 };
 
-module.exports = env;
+export default env;

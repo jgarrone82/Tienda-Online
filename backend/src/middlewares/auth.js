@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 /**
  * Unified JWT authentication middleware.
@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
  * - Does NOT mutate req.body
  * - Returns 401 on invalid/expired token, 403 on missing token
  */
-function auth(peticion, respuesta, next) {
+export function auth(peticion, respuesta, next) {
   // Headers HTTP son case-insensitive, pero usamos el estándar 'authorization'
   const bearerHeader = peticion.headers['authorization'] || peticion.headers['Authorization'];
 
@@ -35,5 +35,3 @@ function auth(peticion, respuesta, next) {
       .send({ resultado: 'Acceso Denegado', msg: 'Token inválido o expirado' });
   }
 }
-
-module.exports = { auth };

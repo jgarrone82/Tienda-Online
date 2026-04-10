@@ -1,4 +1,4 @@
-class AppError extends Error {
+export class AppError extends Error {
   constructor(message, statusCode, code = null, details = null) {
     super(message);
     this.statusCode = statusCode;
@@ -10,7 +10,7 @@ class AppError extends Error {
   }
 }
 
-class ValidationError extends AppError {
+export class ValidationError extends AppError {
   constructor(message, details = null) {
     super(message, 400);
     this.name = 'ValidationError';
@@ -18,31 +18,23 @@ class ValidationError extends AppError {
   }
 }
 
-class NotFoundError extends AppError {
+export class NotFoundError extends AppError {
   constructor(message = 'Recurso no encontrado') {
     super(message, 404);
     this.name = 'NotFoundError';
   }
 }
 
-class UnauthorizedError extends AppError {
+export class UnauthorizedError extends AppError {
   constructor(message = 'No autorizado') {
     super(message, 401);
     this.name = 'UnauthorizedError';
   }
 }
 
-class ConflictError extends AppError {
+export class ConflictError extends AppError {
   constructor(message) {
     super(message, 409);
     this.name = 'ConflictError';
   }
 }
-
-module.exports = {
-  AppError,
-  ValidationError,
-  NotFoundError,
-  UnauthorizedError,
-  ConflictError,
-};

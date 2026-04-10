@@ -1,4 +1,4 @@
-const { ProductService, CartService } = require('../services/catalog.service');
+import { ProductService, CartService } from '../services/catalog.service.js';
 // Removed unused ValidationError import
 
 // Helper function to validate with Zod and throw ValidationError
@@ -146,4 +146,4 @@ const catalogController = {
   },
 };
 
-module.exports = catalogController;
+export default catalogController;

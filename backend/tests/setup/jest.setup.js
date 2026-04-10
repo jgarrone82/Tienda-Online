@@ -1,5 +1,5 @@
-const { MongoMemoryReplSet } = require('mongodb-memory-server');
-const mongoose = require('mongoose');
+import { MongoMemoryReplSet } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
 
 let mongod;
 

@@ -1,6 +1,6 @@
-const express = require('express');
-const catalogController = require('../controllers/catalog.controller');
-const { auth } = require('../middlewares/auth');
+import express from 'express';
+import catalogController from '../controllers/catalog.controller.js';
+import { auth } from '../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -15,4 +15,4 @@ router.post('/agregaCarrito', auth, catalogController.agregaCarrito);
 router.get('/muestraCarrito', auth, catalogController.muestraCarrito);
 router.get('/pagar', auth, catalogController.pagar);
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-const { registerSchema, loginSchema } = require('../validators/auth.schema');
-const { register, login } = require('../services/auth.service');
-const { ValidationError } = require('../errors/AppError');
+import { registerSchema, loginSchema } from '../validators/auth.schema.js';
+import { register, login } from '../services/auth.service.js';
+import { ValidationError } from '../errors/AppError.js';
 
 // Helper function to validate with Zod and throw ValidationError
 function validateWithZod(schema, body) {
@@ -79,4 +79,4 @@ const authController = {
   },
 };
 
-module.exports = authController;
+export default authController;

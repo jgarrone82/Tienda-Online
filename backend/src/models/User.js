@@ -1,5 +1,5 @@
-const bcrypt = require('bcryptjs');
-const mongoose = require('mongoose');
+import bcrypt from 'bcryptjs';
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
@@ -24,5 +24,4 @@ UserSchema.methods.compararContrasena = async function (contrasenaIngresada) {
   return await bcrypt.compare(contrasenaIngresada, this.contrasena);
 };
 
-// Keep collection name 'UsuarioHP' for backward compatibility
-module.exports = mongoose.model('UsuarioHP', UserSchema);
+export default mongoose.model('UsuarioHP', UserSchema);

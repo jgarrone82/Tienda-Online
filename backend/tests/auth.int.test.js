@@ -1,7 +1,6 @@
-const request = require('supertest');
-// Removed unused mongoose import
-const app = require('../src/app');
-const User = require('../src/models/User');
+import request from 'supertest';
+import app from '../src/app.js';
+import User from '../src/models/User.js';
 
 describe('Auth Integration Tests', () => {
   beforeEach(async () => {
@@ -68,7 +67,7 @@ describe('Auth Integration Tests', () => {
 
   describe('POST /api/auth/login', () => {
     beforeEach(async () => {
-      const bcryptjs = require('bcryptjs');
+      const bcryptjs = (await import('bcryptjs')).default;
       const hashedPassword = await bcryptjs.hash('password123', 10);
       await User.create({
         usuario: 'testuser',
@@ -113,9 +112,9 @@ describe('Auth Integration Tests', () => {
     let token;
 
     beforeEach(async () => {
-      const bcryptjs = require('bcryptjs');
-      const jwt = require('jsonwebtoken');
-      const env = require('../src/config/env');
+      const bcryptjs = (await import('bcryptjs')).default;
+      const jwt = (await import('jsonwebtoken')).default;
+      const env = (await import('../src/config/env.js')).default;
 
       const hashedPassword = await bcryptjs.hash('password123', 10);
       const user = await User.create({

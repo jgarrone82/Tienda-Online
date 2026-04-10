@@ -1,7 +1,6 @@
-const request = require('supertest');
-// Removed unused mongoose import
-const app = require('../src/app');
-const Product = require('../src/models/Product');
+import request from 'supertest';
+import app from '../src/app.js';
+import Product from '../src/models/Product.js';
 
 describe('Products Integration Tests', () => {
   beforeEach(async () => {
