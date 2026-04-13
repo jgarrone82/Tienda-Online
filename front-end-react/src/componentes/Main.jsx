@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import Encabezado from './Encabezado';
 import CatalogoProductos from './CatalogoProductos';
 import VistaPrevia from './VistaPrevia';
@@ -7,6 +8,7 @@ import Carrito from './Carrito';
 
 function Main(props) {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
   const [token, setToken] = useState('');
   const [autenticado, setAutenticado] = useState(false);
@@ -14,8 +16,6 @@ function Main(props) {
   const [productosCarrito, setProductosCarrito] = useState([]);
   const [carrito, setCarrito] = useState(0);
   const [total, setTotal] = useState(0);
-  const [mensaje, setMensaje] = useState('');
-  const [mensajeTipo, setMensajeTipo] = useState('');
 
   const objetoPeticion = (metodo, datos, tokenHeader = token) => {
     return {
@@ -44,8 +44,7 @@ function Main(props) {
       let carritoRespuesta = await respuesta.json();
       setCarrito(carritoRespuesta);
     } catch (error) {
-      setMensaje('Error al obtener cantidad de productos');
-      setMensajeTipo('error');
+      enqueueSnackbar('Error al obtener cantidad de productos', { variant: 'error' });
     }
   };
 
@@ -74,17 +73,12 @@ function Main(props) {
     );
 
     if (respuesta) {
-      setMensaje(
-        'Se agregó ' +
-          propsProducto.cantidadCarrito +
-          ' ' +
-          propsProducto.nombreProducto +
-          '(s) a la cesta',
+      enqueueSnackbar(
+        `Se agregó ${propsProducto.cantidadCarrito} ${propsProducto.nombreProducto}(s) a la cesta`,
+        { variant: 'success' },
       );
-      setMensajeTipo('exito');
     } else {
-      setMensaje(respuesta.msg);
-      setMensajeTipo('error');
+      enqueueSnackbar(respuesta.msg, { variant: 'error' });
     }
     await muestraCarrito();
     await cantidadProductos();
@@ -102,8 +96,7 @@ function Main(props) {
         setTotal(0);
         setCarrito(0);
         setProductosCarrito([]);
-        setMensaje(datos.msg);
-        setMensajeTipo('exito');
+        enqueueSnackbar(datos.msg, { variant: 'success' });
       });
 
     navigate('/main');
@@ -111,8 +104,7 @@ function Main(props) {
 
   const salir = () => {
     localStorage.removeItem('token');
-    setMensaje('Hasta luego...');
-    setMensajeTipo('exito');
+    enqueueSnackbar('Hasta luego...', { variant: 'success' });
     navigate('/login');
   };
 
@@ -122,8 +114,7 @@ function Main(props) {
       setToken(tokenActual);
 
       if (tokenActual === 'Bearer null') {
-        setMensaje('Por favor autenticarse primero...');
-        setMensajeTipo('error');
+        enqueueSnackbar('Por favor autenticarse primero...', { variant: 'error' });
         navigate('/login');
         return;
       }
@@ -141,10 +132,6 @@ function Main(props) {
       <div className="encabezado">
         <Encabezado carrito={carrito} salir={salir} />
       </div>
-
-      {mensaje && (
-        <p className={mensajeTipo === 'exito' ? 'mensaje-exito' : 'mensaje-error'}>{mensaje}</p>
-      )}
 
       <Routes>
         <Route

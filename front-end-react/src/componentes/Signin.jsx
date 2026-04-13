@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function Signin(props) {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [campos, setCampos] = useState({});
-  const [mensaje, setMensaje] = useState('');
-  const [mensajeTipo, setMensajeTipo] = useState('');
 
   const handleCampos = (e) => {
     setCampos((prevCampos) => ({
@@ -17,7 +17,6 @@ function Signin(props) {
 
   const handleFormulario = async (e) => {
     e.preventDefault();
-    setMensaje('');
 
     try {
       const peticion = {
@@ -32,16 +31,13 @@ function Signin(props) {
       let json = await respuesta.json();
 
       if (json.resultado === 'SI') {
-        setMensaje(json.msg);
-        setMensajeTipo('exito');
+        enqueueSnackbar(json.msg, { variant: 'success' });
         navigate('/login');
       } else {
-        setMensaje(json.msg);
-        setMensajeTipo('error');
+        enqueueSnackbar(json.msg, { variant: 'error' });
       }
     } catch (error) {
-      setMensaje('Error al intentar registrarse');
-      setMensajeTipo('error');
+      enqueueSnackbar('Error al intentar registrarse', { variant: 'error' });
     }
   };
 
@@ -50,10 +46,6 @@ function Signin(props) {
       <div className="fondo2">
         <form className="formulario" onSubmit={handleFormulario}>
           <h1 className="texto1">Registrate!</h1>
-
-          {mensaje && (
-            <p className={mensajeTipo === 'exito' ? 'mensaje-exito' : 'mensaje-error'}>{mensaje}</p>
-          )}
 
           <div>
             <label>Nombre:</label>

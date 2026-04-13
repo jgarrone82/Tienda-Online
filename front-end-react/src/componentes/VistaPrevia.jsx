@@ -1,17 +1,35 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+
+const StyledVistaContenedor = styled('div')({
+  backgroundColor: 'white',
+  padding: '0px 40px 20px 20px',
+});
+
+const StyledVistaTarjeta = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+});
+
+const StyledImgVista = styled('img')({
+  marginRight: '50px',
+  width: '330px',
+  border: 'solid rgb(199, 198, 198)',
+  borderWidth: 'thin',
+  borderRadius: '10px',
+});
 
 const VistaPrevia = (props) => {
   const navigate = useNavigate();
   const { nombreProducto, imagenUrl, cantidadDisponible, precioUnitario } = props.producto;
   return (
-    <div className="vistaContenedor">
+    <StyledVistaContenedor>
       <h1 className="vistaTitulo">{nombreProducto}</h1>
-      <div className="vistaTarjeta">
+      <StyledVistaTarjeta>
         <div className="fotografia">
-          <img
+          <StyledImgVista
             src={new URL('../assets/img/' + imagenUrl, import.meta.url).href}
-            className="imgVista"
             alt="VistaProducto"
           />
         </div>
@@ -26,11 +44,11 @@ const VistaPrevia = (props) => {
             Unidades Disponibles: <span>{cantidadDisponible}</span>
           </h3>
         </div>
-      </div>
+      </StyledVistaTarjeta>
       <button onClick={() => navigate('/main')} className="boton-primario">
         Atrás
       </button>
-    </div>
+    </StyledVistaContenedor>
   );
 };
 

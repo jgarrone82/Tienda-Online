@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 function Login(props) {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [campos, setCampos] = useState({});
-  const [mensaje, setMensaje] = useState('');
-  const [mensajeTipo, setMensajeTipo] = useState('');
 
   const objetoPeticion = (metodo, datos) => {
     return {
@@ -23,7 +23,6 @@ function Login(props) {
 
   const handleFormulario = async (e) => {
     e.preventDefault();
-    setMensaje('');
 
     try {
       const respuesta = await fetch(`${API_URL}/API/login`, objetoPeticion('POST', campos));
@@ -31,16 +30,13 @@ function Login(props) {
 
       if (json.resultado === 'Autorizado') {
         localStorage.setItem('token', json.token);
-        setMensaje(json.msg);
-        setMensajeTipo('exito');
+        enqueueSnackbar(json.msg, { variant: 'success' });
         navigate('/main');
       } else {
-        setMensaje(json.msg);
-        setMensajeTipo('error');
+        enqueueSnackbar(json.msg, { variant: 'error' });
       }
     } catch (error) {
-      setMensaje('Error al intentar iniciar sesión');
-      setMensajeTipo('error');
+      enqueueSnackbar('Error al intentar iniciar sesión', { variant: 'error' });
     }
   };
 
@@ -62,10 +58,6 @@ function Login(props) {
       <div className="fondo2">
         <form className="formulario" onSubmit={handleFormulario}>
           <h1 className="texto1">Iniciar sesión</h1>
-
-          {mensaje && (
-            <p className={mensajeTipo === 'exito' ? 'mensaje-exito' : 'mensaje-error'}>{mensaje}</p>
-          )}
 
           <label>Correo electrónico:</label>
           <input
