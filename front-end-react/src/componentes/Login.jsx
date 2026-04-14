@@ -25,7 +25,7 @@ function Login(props) {
     e.preventDefault();
 
     try {
-      const respuesta = await fetch(`${API_URL}/API/login`, objetoPeticion('POST', campos));
+      const respuesta = await fetch(`${API_URL}/api/auth/login`, objetoPeticion('POST', campos));
       let json = await respuesta.json();
 
       if (json.resultado === 'Autorizado') {
@@ -48,7 +48,7 @@ function Login(props) {
   };
 
   useEffect(() => {
-    fetch(`${API_URL}/catalogo/inventarioInicial`, objetoPeticion('GET'))
+    fetch(`${API_URL}/api/catalogo/inventarioInicial`, objetoPeticion('GET'))
       .then((respuesta) => respuesta.json())
       .catch(() => {});
   }, []);

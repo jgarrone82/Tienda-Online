@@ -36,7 +36,7 @@ function CatalogoProductos(props) {
     try {
       setCargando(true);
       setError('');
-      const respuesta = await fetch(URL + '/catalogo/cargueProductos');
+      const respuesta = await fetch(URL + '/api/catalogo/cargueProductos');
       const datos = await respuesta.json();
       setProductos(datos);
     } catch (err) {

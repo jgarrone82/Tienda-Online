@@ -27,7 +27,7 @@ function Signin(props) {
         },
         body: JSON.stringify(campos),
       };
-      const respuesta = await fetch(`${API_URL}/API/nuevoUsuario`, peticion);
+      const respuesta = await fetch(`${API_URL}/api/auth/nuevoUsuario`, peticion);
       let json = await respuesta.json();
 
       if (json.resultado === 'SI') {

@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 const env = {
+  PORT: process.env.PORT || 4000,
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost/tienda_db',
   JWT_SECRET: process.env.JWT_SECRET,
   RATE_LIMIT_LOGIN: process.env.RATE_LIMIT_LOGIN || 5,

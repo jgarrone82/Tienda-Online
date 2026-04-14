@@ -23,7 +23,7 @@ function Main(props) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        autorizacion: tokenHeader,
+        Authorization: `Bearer ${tokenHeader}`,
         Origin: '',
         Host: '',
       },
@@ -32,25 +32,30 @@ function Main(props) {
   };
 
   const obtenerToken = () => {
-    return `Bearer ${localStorage.getItem('token')}`;
+    return localStorage.getItem('token') || 'null';
   };
 
   const cantidadProductos = async (tokenHeader = token) => {
     try {
       const respuesta = await fetch(
-        `${API_URL}/catalogo/cantidadProductos`,
+        `${API_URL}/api/catalogo/cantidadProductos`,
         objetoPeticion('GET', undefined, tokenHeader),
       );
-      let carritoRespuesta = await respuesta.json();
-      setCarrito(carritoRespuesta);
+      if (!respuesta.ok) {
+        setCarrito(0);
+        return;
+      }
+      const texto = await respuesta.text();
+      const cantidad = texto ? parseInt(texto, 10) : 0;
+      setCarrito(isNaN(cantidad) ? 0 : cantidad);
     } catch (error) {
-      enqueueSnackbar('Error al obtener cantidad de productos', { variant: 'error' });
+      setCarrito(0);
     }
   };
 
   const muestraCarrito = async (tokenHeader = token) => {
     const respuesta = await fetch(
-      `${API_URL}/catalogo/muestraCarrito`,
+      `${API_URL}/api/catalogo/muestraCarrito`,
       objetoPeticion('GET', undefined, tokenHeader),
     );
 
@@ -63,12 +68,15 @@ function Main(props) {
         subtotales += productosCarrito[i]['subtotal'];
       }
       setTotal(subtotales);
+    } else {
+      setProductosCarrito([]);
+      setTotal(0);
     }
   };
 
   const agregaProductoCarrito = async (propsProducto) => {
     const respuesta = await fetch(
-      `${API_URL}/catalogo/agregaCarrito`,
+      `${API_URL}/api/catalogo/agregaCarrito`,
       objetoPeticion('POST', propsProducto),
     );
 
@@ -90,7 +98,7 @@ function Main(props) {
   };
 
   const pagar = async () => {
-    await fetch(`${API_URL}/catalogo/pagar`, objetoPeticion('GET'))
+    await fetch(`${API_URL}/api/catalogo/pagar`, objetoPeticion('GET'))
       .then((respuesta) => respuesta.json())
       .then((datos) => {
         setTotal(0);
@@ -113,7 +121,7 @@ function Main(props) {
       const tokenActual = obtenerToken();
       setToken(tokenActual);
 
-      if (tokenActual === 'Bearer null') {
+      if (tokenActual === 'null' || !tokenActual) {
         enqueueSnackbar('Por favor autenticarse primero...', { variant: 'error' });
         navigate('/login');
         return;
