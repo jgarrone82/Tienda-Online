@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
-function Signin(props) {
+function Signin() {
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -36,7 +36,7 @@ function Signin(props) {
       } else {
         enqueueSnackbar(json.msg, { variant: 'error' });
       }
-    } catch (error) {
+    } catch {
       enqueueSnackbar('Error al intentar registrarse', { variant: 'error' });
     }
   };

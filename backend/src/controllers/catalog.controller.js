@@ -113,7 +113,7 @@ const catalogController = {
       } else {
         respuesta.status(204).send(null);
       }
-    } catch (error) {
+    } catch {
       respuesta.status(500).send('Error interno del servidor');
     }
   },

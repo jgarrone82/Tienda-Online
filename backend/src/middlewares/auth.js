@@ -29,7 +29,7 @@ export function auth(peticion, respuesta, next) {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
     peticion.userId = payload._id;
     next();
-  } catch (error) {
+  } catch {
     return respuesta
       .status(401)
       .send({ resultado: 'Acceso Denegado', msg: 'Token inválido o expirado' });

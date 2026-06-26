@@ -6,7 +6,7 @@ import CatalogoProductos from './CatalogoProductos';
 import VistaPrevia from './VistaPrevia';
 import Carrito from './Carrito';
 
-function Main(props) {
+function Main() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
@@ -48,7 +48,7 @@ function Main(props) {
       const texto = await respuesta.text();
       const cantidad = texto ? parseInt(texto, 10) : 0;
       setCarrito(isNaN(cantidad) ? 0 : cantidad);
-    } catch (error) {
+    } catch {
       setCarrito(0);
     }
   };
