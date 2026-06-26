@@ -39,7 +39,7 @@ function CatalogoProductos(props) {
       const respuesta = await fetch(URL + '/api/catalogo/cargueProductos');
       const datos = await respuesta.json();
       setProductos(datos);
-    } catch (err) {
+    } catch {
       setError('Hubo un error al cargar productos');
     } finally {
       setCargando(false);
